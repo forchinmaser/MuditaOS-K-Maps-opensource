@@ -18,166 +18,166 @@ var tts;
 ////////////////////////////////////////////////////////////////
 function populateDictionary(tts) {
 	// ROUTE CALCULATED
-	dictionary["route_is"] = tts ? "cesta je dlouhá" : "route_is.ogg";
-	dictionary["route_calculate"] = tts ? "cesta přepočtena" : "route_calculate.ogg";
-	dictionary["distance"] = tts ? "cesta je dlouhá" : "distance.ogg";
+	dictionary["route_is"] = tts ? "cesta je dlouhá" : "route_is.mp3";
+	dictionary["route_calculate"] = tts ? "cesta přepočtena" : "route_calculate.mp3";
+	dictionary["distance"] = tts ? "cesta je dlouhá" : "distance.mp3";
 	
 	// LEFT/RIGHT
-	//dictionary["prepare"] = tts ? "budete odbočovat" : "prepare.ogg";
-	dictionary["after"] = tts ? "po" : "after.ogg";
-	dictionary["in"] = tts ? "po" : "in.ogg";
+	//dictionary["prepare"] = tts ? "budete odbočovat" : "prepare.mp3";
+	dictionary["after"] = tts ? "po" : "after.mp3";
+	dictionary["in"] = tts ? "po" : "in.mp3";
 	
-	dictionary["left"] = tts ? "odbočte doleva" : "left.ogg";
-	dictionary["left_sh"] = tts ? "odbočte ostře doleva" : "left_sh.ogg";
-	dictionary["left_sl"] = tts ? "odbočte mírně doleva" : "left_sl.ogg";
-	dictionary["right"] = tts ? "odbočte doprava" : "right.ogg";
-	dictionary["right_sh"] = tts ? "odbočte ostře doprava" : "right_sh.ogg";
-	dictionary["right_sl"] = tts ? "odbočte mírně doprava" : "right_sl.ogg";
+	dictionary["left"] = tts ? "odbočte doleva" : "left.mp3";
+	dictionary["left_sh"] = tts ? "odbočte ostře doleva" : "left_sh.mp3";
+	dictionary["left_sl"] = tts ? "odbočte mírně doleva" : "left_sl.mp3";
+	dictionary["right"] = tts ? "odbočte doprava" : "right.mp3";
+	dictionary["right_sh"] = tts ? "odbočte ostře doprava" : "right_sh.mp3";
+	dictionary["right_sl"] = tts ? "odbočte mírně doprava" : "right_sl.mp3";
 	// Note: "left_keep"/"right_keep" is a turn type aiding lane selection, while "left_bear"/"right_bear" is as brief "then..." preparation for the turn-after-next. In some languages l/r_keep may not differ from l/r_bear.
-	dictionary["left_keep"] = tts ? "držte se vlevo" : "left_keep.ogg";
-	dictionary["right_keep"] = tts ? "držte se vpravo" : "right_keep.ogg";
-	dictionary["left_bear"] = tts ? "se držte vlevo" : "left_bear.ogg";    // in English the same as left_keep, may be different in other languages
-	dictionary["right_bear"] = tts ? "se držte vpravo" : "right_bear.ogg";  // in English the same as right_keep, may be different in other languages
+	dictionary["left_keep"] = tts ? "držte se vlevo" : "left_keep.mp3";
+	dictionary["right_keep"] = tts ? "držte se vpravo" : "right_keep.mp3";
+	dictionary["left_bear"] = tts ? "se držte vlevo" : "left_bear.mp3";    // in English the same as left_keep, may be different in other languages
+	dictionary["right_bear"] = tts ? "se držte vpravo" : "right_bear.mp3";  // in English the same as right_keep, may be different in other languages
 	
 	// U-TURNS
-	//dictionary["prepare_make_uturn"] = tts ? "se budete otáčet zpět" : "prepare_make_uturn.ogg";
-	dictionary["make_uturn"] = tts ? "se otočte zpět" : "make_uturn.ogg";
-	dictionary["make_uturn2"] = tts ? "otočte se zpět" : "make_uturn2.ogg";
-	dictionary["make_uturn_wp"] = tts ? "otočte se, jakmile to bude možné" : "make_uturn_wp.ogg";
+	//dictionary["prepare_make_uturn"] = tts ? "se budete otáčet zpět" : "prepare_make_uturn.mp3";
+	dictionary["make_uturn"] = tts ? "se otočte zpět" : "make_uturn.mp3";
+	dictionary["make_uturn2"] = tts ? "otočte se zpět" : "make_uturn2.mp3";
+	dictionary["make_uturn_wp"] = tts ? "otočte se, jakmile to bude možné" : "make_uturn_wp.mp3";
 	
 	// ROUNDABOUTS
-	dictionary["prepare_roundabout"] = tts ? "přijedete na kruhový objezd" : "prepare_roundabout.ogg";
-	dictionary["roundabout"] = tts ? "vjeďte na kruhový objezd" : "roundabout.ogg";
-	dictionary["then"] = tts ? "pak" : "then.ogg";
-	dictionary["and"] = tts ? "a" : "and.ogg";
-	dictionary["take"] = tts ? "a zvolte" : "take.ogg";
-	dictionary["take2"] = tts ? "vyjeďte" : "take2.ogg";
-	dictionary["exit"] = tts ? "výjezd" : "exit.ogg";
-	dictionary["exit2"] = tts ? "výjezdem" : "exit2.ogg";
+	dictionary["prepare_roundabout"] = tts ? "přijedete na kruhový objezd" : "prepare_roundabout.mp3";
+	dictionary["roundabout"] = tts ? "vjeďte na kruhový objezd" : "roundabout.mp3";
+	dictionary["then"] = tts ? "pak" : "then.mp3";
+	dictionary["and"] = tts ? "a" : "and.mp3";
+	dictionary["take"] = tts ? "a zvolte" : "take.mp3";
+	dictionary["take2"] = tts ? "vyjeďte" : "take2.mp3";
+	dictionary["exit"] = tts ? "výjezd" : "exit.mp3";
+	dictionary["exit2"] = tts ? "výjezdem" : "exit2.mp3";
 	
-	dictionary["1st"] = tts ? "první" : "1st.ogg";
-	dictionary["2nd"] = tts ? "druhý" : "2nd.ogg";
-	dictionary["3rd"] = tts ? "třetí" : "3rd.ogg";
-	dictionary["4th"] = tts ? "čtvrtý" : "4th.ogg";
-	dictionary["5th"] = tts ? "pátý" : "5th.ogg";
-	dictionary["6th"] = tts ? "šestý" : "6th.ogg";
-	dictionary["7th"] = tts ? "sedmý" : "7th.ogg";
-	dictionary["8th"] = tts ? "osmý" : "8th.ogg";
-	dictionary["9th"] = tts ? "devátý" : "9th.ogg";
-	dictionary["10th"] = tts ? "desátý" : "10th.ogg";
-	dictionary["11th"] = tts ? "jedenáctý" : "11th.ogg";
-	dictionary["12th"] = tts ? "dvanáctý" : "12th.ogg";
-	dictionary["13th"] = tts ? "třináctý" : "13th.ogg";
-	dictionary["14th"] = tts ? "čtrnáctý" : "14th.ogg";
-	dictionary["15th"] = tts ? "patnáctý" : "15th.ogg";
-	dictionary["16th"] = tts ? "šestnáctý" : "16th.ogg";
-	dictionary["17th"] = tts ? "sedmnáctý" : "17th.ogg";
+	dictionary["1st"] = tts ? "první" : "1st.mp3";
+	dictionary["2nd"] = tts ? "druhý" : "2nd.mp3";
+	dictionary["3rd"] = tts ? "třetí" : "3rd.mp3";
+	dictionary["4th"] = tts ? "čtvrtý" : "4th.mp3";
+	dictionary["5th"] = tts ? "pátý" : "5th.mp3";
+	dictionary["6th"] = tts ? "šestý" : "6th.mp3";
+	dictionary["7th"] = tts ? "sedmý" : "7th.mp3";
+	dictionary["8th"] = tts ? "osmý" : "8th.mp3";
+	dictionary["9th"] = tts ? "devátý" : "9th.mp3";
+	dictionary["10th"] = tts ? "desátý" : "10th.mp3";
+	dictionary["11th"] = tts ? "jedenáctý" : "11th.mp3";
+	dictionary["12th"] = tts ? "dvanáctý" : "12th.mp3";
+	dictionary["13th"] = tts ? "třináctý" : "13th.mp3";
+	dictionary["14th"] = tts ? "čtrnáctý" : "14th.mp3";
+	dictionary["15th"] = tts ? "patnáctý" : "15th.mp3";
+	dictionary["16th"] = tts ? "šestnáctý" : "16th.mp3";
+	dictionary["17th"] = tts ? "sedmnáctý" : "17th.mp3";
 	
-	dictionary["1st_inst"] = tts ? "prvním" : "1st_inst.ogg";
-	dictionary["2nd_inst"] = tts ? "druhým" : "2nd_inst.ogg";
-	dictionary["3rd_inst"] = tts ? "třetím" : "3rd_inst.ogg";
-	dictionary["4th_inst"] = tts ? "čtvrtým" : "4th_inst.ogg";
-	dictionary["5th_inst"] = tts ? "pátým" : "5th_inst.ogg";
-	dictionary["6th_inst"] = tts ? "šestým" : "6th_inst.ogg";
-	dictionary["7th_inst"] = tts ? "sedmým" : "7th_inst.ogg";
-	dictionary["8th_inst"] = tts ? "osmým" : "8th_inst.ogg";
-	dictionary["9th_inst"] = tts ? "devátým" : "9th_inst.ogg";
-	dictionary["10th_inst"] = tts ? "desátým" : "10th_inst.ogg";
-	dictionary["11th_inst"] = tts ? "jedenáctým" : "11th_inst.ogg";
-	dictionary["12th_inst"] = tts ? "dvanáctým" : "12th_inst.ogg";
-	dictionary["13th_inst"] = tts ? "třináctým" : "13th_inst.ogg";
-	dictionary["14th_inst"] = tts ? "čtrnáctým" : "14th_inst.ogg";
-	dictionary["15th_inst"] = tts ? "patnáctým" : "15th_inst.ogg";
-	dictionary["16th_inst"] = tts ? "šestnáctým" : "16th_inst.ogg";
-	dictionary["17th_inst"] = tts ? "sedmnáctým" : "17th_inst.ogg";
+	dictionary["1st_inst"] = tts ? "prvním" : "1st_inst.mp3";
+	dictionary["2nd_inst"] = tts ? "druhým" : "2nd_inst.mp3";
+	dictionary["3rd_inst"] = tts ? "třetím" : "3rd_inst.mp3";
+	dictionary["4th_inst"] = tts ? "čtvrtým" : "4th_inst.mp3";
+	dictionary["5th_inst"] = tts ? "pátým" : "5th_inst.mp3";
+	dictionary["6th_inst"] = tts ? "šestým" : "6th_inst.mp3";
+	dictionary["7th_inst"] = tts ? "sedmým" : "7th_inst.mp3";
+	dictionary["8th_inst"] = tts ? "osmým" : "8th_inst.mp3";
+	dictionary["9th_inst"] = tts ? "devátým" : "9th_inst.mp3";
+	dictionary["10th_inst"] = tts ? "desátým" : "10th_inst.mp3";
+	dictionary["11th_inst"] = tts ? "jedenáctým" : "11th_inst.mp3";
+	dictionary["12th_inst"] = tts ? "dvanáctým" : "12th_inst.mp3";
+	dictionary["13th_inst"] = tts ? "třináctým" : "13th_inst.mp3";
+	dictionary["14th_inst"] = tts ? "čtrnáctým" : "14th_inst.mp3";
+	dictionary["15th_inst"] = tts ? "patnáctým" : "15th_inst.mp3";
+	dictionary["16th_inst"] = tts ? "šestnáctým" : "16th_inst.mp3";
+	dictionary["17th_inst"] = tts ? "sedmnáctým" : "17th_inst.mp3";
 	
 	// STRAIGHT/FOLLOW
-	dictionary["go_ahead"] = tts ? "pokračujte rovně" : "go_ahead.ogg";
-	dictionary["follow"] = tts ? "pokračujte" : "go_ahead_m.ogg";
+	dictionary["go_ahead"] = tts ? "pokračujte rovně" : "go_ahead.mp3";
+	dictionary["follow"] = tts ? "pokračujte" : "follow.mp3";
 	
 	// ARRIVE
-	dictionary["and_arrive_destination"] = tts ? "a dorazíte do cíle" : "and_arrive_destination.ogg";
-	dictionary["reached_destination"] = tts ? "dorazili jste do cíle" : "reached_destination.ogg";
-	dictionary["and_arrive_intermediate"] = tts ? "a dorazíte do mezicíle" : "and_arrive_intermediate.ogg";
-	dictionary["reached_intermediate"] = tts ? "dorazili jste do mezicíle" : "reached_intermediate.ogg";
+	dictionary["and_arrive_destination"] = tts ? "a dorazíte do cíle" : "and_arrive_destination.mp3";
+	dictionary["reached_destination"] = tts ? "dorazili jste do cíle" : "reached_destination.mp3";
+	dictionary["and_arrive_intermediate"] = tts ? "a dorazíte do mezicíle" : "and_arrive_intermediate.mp3";
+	dictionary["reached_intermediate"] = tts ? "dorazili jste do mezicíle" : "reached_intermediate.mp3";
 	
 	// NEARBY POINTS
-	dictionary["and_arrive_waypoint"] = tts ? "a projedete GPX mezicílem" : "and_arrive_waypoint.ogg";
-	dictionary["reached_waypoint"] = tts ? "projeli jste GPX mezicílem" : "reached_waypoint.ogg";
-	dictionary["and_arrive_favorite"] = tts ? "a projedete oblíbeným bodem" : "and_arrive_favorite.ogg";
-	dictionary["reached_favorite"] = tts ? "projeli jste oblíbeným bodem" : "reached_favorite.ogg";
-	dictionary["and_arrive_poi"] = tts ? "a projedete bodem zájmu" : "and_arrive_poi.ogg";
-	dictionary["reached_poi"] = tts ? "projeli jste bodem zájmu" : "reached_poi.ogg";
+	dictionary["and_arrive_waypoint"] = tts ? "a projedete GPX mezicílem" : "and_arrive_waypoint.mp3";
+	dictionary["reached_waypoint"] = tts ? "projeli jste GPX mezicílem" : "reached_waypoint.mp3";
+	dictionary["and_arrive_favorite"] = tts ? "a projedete oblíbeným bodem" : "and_arrive_favorite.mp3";
+	dictionary["reached_favorite"] = tts ? "projeli jste oblíbeným bodem" : "reached_favorite.mp3";
+	dictionary["and_arrive_poi"] = tts ? "a projedete bodem zájmu" : "and_arrive_poi.mp3";
+	dictionary["reached_poi"] = tts ? "projeli jste bodem zájmu" : "reached_poi.mp3";
 	
 	// ATTENTION
-	//dictionary["exceed_limit"] = tts ? "překračujete povolenou rychlost" : "exceed_limit.ogg";
-	dictionary["exceed_limit"] = tts ? "rychlostní limit" : "exceed_limit.ogg";
-	dictionary["attention"] = tts ? "Pozor" : "attention.ogg";
-	dictionary["speed_camera"] = tts ? "měření rychlosti" : "speed_camera.ogg";
-	dictionary["border_control"] = tts ? "hraniční kontrola" : "border_control.ogg";
-	dictionary["railroad_crossing"] = tts ? "železniční přejezd" : "railroad_crossing.ogg";
+	//dictionary["exceed_limit"] = tts ? "překračujete povolenou rychlost" : "exceed_limit.mp3";
+	dictionary["exceed_limit"] = tts ? "rychlostní limit" : "exceed_limit.mp3";
+	dictionary["attention"] = tts ? "Pozor" : "attention.mp3";
+	dictionary["speed_camera"] = tts ? "měření rychlosti" : "speed_camera.mp3";
+	dictionary["border_control"] = tts ? "hraniční kontrola" : "border_control.mp3";
+	dictionary["railroad_crossing"] = tts ? "železniční přejezd" : "railroad_crossing.mp3";
 	//není jen zpomalovač, ale i šikana a ochranný ostrůvek; viz issue #5605
-	dictionary["traffic_calming"] = tts ? "zklidnění dopravy" : "traffic_calming.ogg";
-	dictionary["toll_booth"] = tts ? "mýtná brána" : "toll_booth.ogg";
-	dictionary["stop"] = tts ? "stopka" : "stop.ogg";
-	dictionary["pedestrian_crosswalk"] = tts ? "přechod pro chodce" : "pedestrian_crosswalk.ogg";
-	dictionary["tunnel"] = tts ? "tunel" : "tunnel.ogg";
+	dictionary["traffic_calming"] = tts ? "zklidnění dopravy" : "traffic_calming.mp3";
+	dictionary["toll_booth"] = tts ? "mýtná brána" : "toll_booth.mp3";
+	dictionary["stop"] = tts ? "stopka" : "stop.mp3";
+	dictionary["pedestrian_crosswalk"] = tts ? "přechod pro chodce" : "pedestrian_crosswalk.mp3";
+	dictionary["tunnel"] = tts ? "tunel" : "tunnel.mp3";
 	
 	// OTHER PROMPTS
-	dictionary["location_lost"] = tts ? "signál G.P.S. ztracen" : "location_lost.ogg";
-	dictionary["location_recovered"] = tts ? "signál G.P.S. obnoven" : "location_recovered.ogg";
-	dictionary["off_route"] = tts ? "nacházíte se" : "off_route.ogg";
-	dictionary["off_route2"] = tts ? " mimo trasu" : "off_route2.ogg";
-	dictionary["back_on_route"] = tts ? "vrátili jste se zpět na trasu" : "back_on_route.ogg";
+	dictionary["location_lost"] = tts ? "signál G.P.S. ztracen" : "location_lost.mp3";
+	dictionary["location_recovered"] = tts ? "signál G.P.S. obnoven" : "location_recovered.mp3";
+	dictionary["off_route"] = tts ? "nacházíte se" : "off_route.mp3";
+	dictionary["off_route2"] = tts ? " mimo trasu" : "off_route2.mp3";
+	dictionary["back_on_route"] = tts ? "vrátili jste se zpět na trasu" : "back_on_route.mp3";
 	
 	// STREET NAME PREPOSITIONS
-	dictionary["onto"] = tts ? "na:" : "onto.ogg";
-	dictionary["on"] = tts ? "na:" : "on.ogg";
-	dictionary["to"] = tts ? "na:" : "to.ogg";
-	dictionary["toward"] = tts ? "ve směru:" : "toward.ogg";
+	dictionary["onto"] = tts ? "na:" : "onto.mp3";
+	dictionary["on"] = tts ? "na:" : "on.mp3";
+	dictionary["to"] = tts ? "na:" : "to.mp3";
+	dictionary["toward"] = tts ? "ve směru:" : "toward.mp3";
 	
 	// DISTANCE UNIT SUPPORT
-	dictionary["meters_accusative"] = tts ? "metrů" : "meters_accusative.ogg";
-	dictionary["around_1_kilometer_accusative"] = tts ? "přibližně jeden kilometr" : "around_1_kilometer_accusative.ogg";
-	dictionary["around_2_kilometers_accusative"] = tts ? "přibližně dva kilometry" : "around_2_kilometers_accusative.ogg";
-	dictionary["around"] = tts ? "přibližně" : "around.ogg";
-	dictionary["kilometers_accusative3_4"] = tts ? "kilometry" : "kilometers_accusative3_4.ogg";
-	dictionary["kilometers_accusative5"] = tts ? "kilometrů" : "kilometers_accusative5.ogg";
+	dictionary["meters_accusative"] = tts ? "metrů" : "meters_accusative.mp3";
+	dictionary["around_1_kilometer_accusative"] = tts ? "přibližně jeden kilometr" : "around_1_kilometer_accusative.mp3";
+	dictionary["around_2_kilometers_accusative"] = tts ? "přibližně dva kilometry" : "around_2_kilometers_accusative.mp3";
+	dictionary["around"] = tts ? "přibližně" : "around.mp3";
+	dictionary["kilometers_accusative3_4"] = tts ? "kilometry" : "kilometers_accusative3_4.mp3";
+	dictionary["kilometers_accusative5"] = tts ? "kilometrů" : "kilometers_accusative5.mp3";
 	
-	dictionary["meters_locative"] = tts ? "metrech" : "meters_locative.ogg";
-	dictionary["around_1_kilometer_locative"] = tts ? "přibližně jednom kilometru" : "around_1_kilometer_locative.ogg";
-	dictionary["around_2_kilometers_locative"] = tts ? "přibližně dvou kilometrech" : "around_2_kilometers_locative.ogg";
-	dictionary["kilometers_locative"] = tts ? "kilometrech" : "kilometers_locative.ogg";
+	dictionary["meters_locative"] = tts ? "metrech" : "meters_locative.mp3";
+	dictionary["around_1_kilometer_locative"] = tts ? "přibližně jednom kilometru" : "around_1_kilometer_locative.mp3";
+	dictionary["around_2_kilometers_locative"] = tts ? "přibližně dvou kilometrech" : "around_2_kilometers_locative.mp3";
+	dictionary["kilometers_locative"] = tts ? "kilometrech" : "kilometers_locative.mp3";
 	
-	dictionary["farther_workaround"] = tts ? "dál" : "farther_workaround.ogg";
-	dictionary["around_workaround"] = tts ? "dál přibližně" : "around_workaround.ogg";
+	dictionary["farther_workaround"] = tts ? "dál" : "farther_workaround.mp3";
+	dictionary["around_workaround"] = tts ? "dál přibližně" : "around_workaround.mp3";
 	
-	dictionary["feet_accusative"] = tts ? "stop" : "feet_accusative.ogg";
-	dictionary["1_tenth_of_a_mile_accusative"] = tts ? "desetinu míle" : "1_tenth_of_a_mile_accusative.ogg";
-	dictionary["tenths_of_a_mile_accusative"] = tts ? "desetiny míle" : "tenths_of_a_mile_accusative.ogg";
-	dictionary["around_1_mile_accusative"] = tts ? "přibližně jednu míli" : "around_1_mile_accusative.ogg";
-	dictionary["miles_accusative"] = tts ? "mil" : "miles_accusative.ogg";
+	dictionary["feet_accusative"] = tts ? "stop" : "feet_accusative.mp3";
+	dictionary["1_tenth_of_a_mile_accusative"] = tts ? "desetinu míle" : "1_tenth_of_a_mile_accusative.mp3";
+	dictionary["tenths_of_a_mile_accusative"] = tts ? "desetiny míle" : "tenths_of_a_mile_accusative.mp3";
+	dictionary["around_1_mile_accusative"] = tts ? "přibližně jednu míli" : "around_1_mile_accusative.mp3";
+	dictionary["miles_accusative"] = tts ? "mil" : "miles_accusative.mp3";
 	
-	dictionary["feet_locative"] = tts ? "stopách" : "feet_locative.ogg";
-	dictionary["1_tenth_of_a_mile_locative"] = tts ? "desetině míle" : "1_tenth_of_a_mile_locative.ogg";
-	dictionary["tenths_of_a_mile_locative"] = tts ? "desetinách míle" : "tenths_of_a_mile_locative.ogg";
-	dictionary["around_1_mile_locative"] = tts ? "přibližně jedné míli" : "around_1_mile_locative.ogg";
-	dictionary["miles_locative"] = tts ? "mílích" : "miles_locative.ogg";
+	dictionary["feet_locative"] = tts ? "stopách" : "feet_locative.mp3";
+	dictionary["1_tenth_of_a_mile_locative"] = tts ? "desetině míle" : "1_tenth_of_a_mile_locative.mp3";
+	dictionary["tenths_of_a_mile_locative"] = tts ? "desetinách míle" : "tenths_of_a_mile_locative.mp3";
+	dictionary["around_1_mile_locative"] = tts ? "přibližně jedné míli" : "around_1_mile_locative.mp3";
+	dictionary["miles_locative"] = tts ? "mílích" : "miles_locative.mp3";
 	
-	dictionary["yards_accusative"] = tts ? "jardů" : "yards_accusative.ogg";
-	dictionary["yards_locative"] = tts ? "jardech" : "yards_locative.ogg";
+	dictionary["yards_accusative"] = tts ? "jardů" : "yards_accusative.mp3";
+	dictionary["yards_locative"] = tts ? "jardech" : "yards_locative.mp3";
 	
 	// TIME SUPPORT
-	dictionary["time"] = tts ? "potřebná doba:" : "time.ogg";
-	dictionary["1_hour"] = tts ? "jedna hodina" : "1_hour.ogg";
-	dictionary["2_hours"] = tts ? "dvě hodiny" : "2_hours.ogg";
-	dictionary["3_4_hours"] = tts ? "hodiny" : "3_4_hours.ogg";
-	dictionary["hours"] = tts ? "hodin" : "hours.ogg";
-	dictionary["less_a_minute"] = tts ? "méně než jedna minuta" : "less_a_minute.ogg";
-	dictionary["1_minute"] = tts ? "jedna minuta" : "1_minute.ogg";
-	dictionary["2_minutes"] = tts ? "dvě minuty" : "2_minutes.ogg";
-	dictionary["3_4_minutes"] = tts ? "minuty" : "3_4_minutes.ogg";
-	dictionary["minutes"] = tts ? "minut" : "minutes.ogg";
+	dictionary["time"] = tts ? "potřebná doba:" : "time.mp3";
+	dictionary["1_hour"] = tts ? "jedna hodina" : "1_hour.mp3";
+	dictionary["2_hours"] = tts ? "dvě hodiny" : "2_hours.mp3";
+	dictionary["3_4_hours"] = tts ? "hodiny" : "3_4_hours.mp3";
+	dictionary["hours"] = tts ? "hodin" : "hours.mp3";
+	dictionary["less_a_minute"] = tts ? "méně než jedna minuta" : "less_a_minute.mp3";
+	dictionary["1_minute"] = tts ? "jedna minuta" : "1_minute.mp3";
+	dictionary["2_minutes"] = tts ? "dvě minuty" : "2_minutes.mp3";
+	dictionary["3_4_minutes"] = tts ? "minuty" : "3_4_minutes.mp3";
+	dictionary["minutes"] = tts ? "minut" : "minutes.mp3";
 }
 
 
@@ -211,9 +211,9 @@ function distance(dist, declension, isWorkaround) {
 			} else if (dist < 2500) {
 				return dictionary["around_2_kilometers_" + declension];
 			} else if (dist < 4500) {
-				return (isWorkaround ? dictionary["around_workaround"] + " " : "") + (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + " " + dictionary["kilometers_" + declension + (accusative ? "3_4" : "")];
+				return (isWorkaround ? dictionary["around_workaround"] + " " : dictionary["around"] + " ") + (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + " " + dictionary["kilometers_" + declension + (accusative ? "3_4" : "")];
 			} else if (dist < 10000) {
-				return (isWorkaround ? dictionary["around_workaround"] + " " : "") + (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + " " + dictionary["kilometers_" + declension + (accusative ? "5" : "")];
+				return (isWorkaround ? dictionary["around_workaround"] + " " : dictionary["around"] + " ") + (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + " " + dictionary["kilometers_" + declension + (accusative ? "5" : "")];
 			} else {
 				return (isWorkaround ? dictionary["farther_workaround"] + " " : "") + (tts ? Math.round(dist/1000.0).toString() : ogg_dist(Math.round(dist/1000.0))) + " " + dictionary["kilometers_" + declension + (accusative ? "5" : "")];
 			}
@@ -288,9 +288,9 @@ function time(seconds) {
 	} else if (tts) {
 		return hours(minutes) + " " + (minutes % 60).toString() + " " + dictionary["minutes"];
 	} else if (!tts && seconds < 270) {
-		return minutes.toString() + ".ogg " + dictionary["3_4_minutes"];
+		return ogg_dist(minutes) + dictionary["3_4_minutes"];
 	} else if (!tts && oggMinutes % 60 > 0) {
-		return hours(oggMinutes) + " " + (oggMinutes % 60).toString() + ".ogg " + dictionary["minutes"];
+		return hours(oggMinutes) + " " + ogg_dist(oggMinutes % 60) + dictionary["minutes"];
 	} else if (!tts) {
 		return hours(oggMinutes);
 	}
@@ -304,10 +304,11 @@ function hours(minutes) {
 	} else if (minutes < 180) {
 		return dictionary["2_hours"];
 	} else if (minutes < 300) {
-		return Math.floor(minutes/60).toString() + " " + dictionary["3_4_hours"];
+		var hours = Math.floor(minutes/60)
+		return  (tts ? hours.toString() : ogg_dist(hours)) + " " + dictionary["3_4_hours"];
 	} else {
-		var hours = minutes / 60;
-        return Math.floor(hours).toString() + (!tts ? ".ogg " : " ") + dictionary["hours"]; 
+		var hours = Math.floor(minutes / 60);
+		return  (tts ? hours.toString() : ogg_dist(hours)) + " " + dictionary["hours"];
 	}
 }
 
@@ -622,44 +623,44 @@ function ogg_dist(distance) {
 	if (distance == 0) {
 		return "";
 	} else if (distance < 20) {
-		return Math.floor(distance).toString() + ".ogg ";
+		return Math.floor(distance).toString() + ".mp3 ";
 	} else if (distance < 1000 && (distance % 50) == 0) {
-		return distance.toString() + ".ogg ";
+		return distance.toString() + ".mp3 ";
 	} else if (distance < 30) {
-		return "20.ogg " + ogg_dist(distance - 20);
+		return "20.mp3 " + ogg_dist(distance - 20);
 	} else if (distance < 40) {
-		return "30.ogg " + ogg_dist(distance - 30);
+		return "30.mp3 " + ogg_dist(distance - 30);
 	} else if (distance < 50) {
-		return "40.ogg " + ogg_dist(distance - 40);
+		return "40.mp3 " + ogg_dist(distance - 40);
 	} else if (distance < 60) {
-		return "50.ogg " + ogg_dist(distance - 50);
+		return "50.mp3 " + ogg_dist(distance - 50);
 	} else if (distance < 70) {
-		return "60.ogg " + ogg_dist(distance - 60);
+		return "60.mp3 " + ogg_dist(distance - 60);
 	} else if (distance < 80) {
-		return "70.ogg "+ ogg_dist(distance - 70);
+		return "70.mp3 "+ ogg_dist(distance - 70);
 	} else if (distance < 90) {
-		return "80.ogg " + ogg_dist(distance - 80);
+		return "80.mp3 " + ogg_dist(distance - 80);
 	} else if (distance < 100) {
-		return "90.ogg " + ogg_dist(distance - 90);
+		return "90.mp3 " + ogg_dist(distance - 90);
 	} else if (distance < 200) {
-		return "100.ogg " + ogg_dist(distance - 100);
+		return "100.mp3 " + ogg_dist(distance - 100);
 	} else if (distance < 300) {
-		return "200.ogg " + ogg_dist(distance - 200);
+		return "200.mp3 " + ogg_dist(distance - 200);
 	} else if (distance < 400) {
-		return "300.ogg "+ ogg_dist(distance - 300);
+		return "300.mp3 "+ ogg_dist(distance - 300);
 	} else if (distance < 500) {
-		return "400.ogg " + ogg_dist(distance - 400);
+		return "400.mp3 " + ogg_dist(distance - 400);
 	} else if (distance < 600) {
-		return "500.ogg " + ogg_dist(distance - 500);
+		return "500.mp3 " + ogg_dist(distance - 500);
 	} else if (distance < 700) {
-		return "600.ogg " + ogg_dist(distance - 600);
+		return "600.mp3 " + ogg_dist(distance - 600);
 	} else if (distance < 800) {
-		return "700.ogg " + ogg_dist(distance - 700);
+		return "700.mp3 " + ogg_dist(distance - 700);
 	} else if (distance < 900) {
-		return "800.ogg " + ogg_dist(distance - 800);
+		return "800.mp3 " + ogg_dist(distance - 800);
 	} else if (distance < 1000) {
-		return "900.ogg " + ogg_dist(distance - 900);
+		return "900.mp3 " + ogg_dist(distance - 900);
 	} else {
-		return ogg_dist(distance/1000) + "1000.ogg " + ogg_dist(distance % 1000);
+		return ogg_dist(distance/1000) + "1000.mp3 " + ogg_dist(distance % 1000);
 	}
 }

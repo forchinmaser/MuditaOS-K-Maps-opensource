@@ -1,4 +1,6 @@
 [versions]
+about-libraries = "1.0.4"
+about-libraries-plugin = "11.2.3"
 accompanist = "0.28.0"
 androidGradlePlugin = "8.1.1"
 appcompat = "1.7.0"
@@ -39,6 +41,7 @@ timber = "5.0.1"
 turbine = "0.8.0"
 
 [libraries]
+about-libraries = { module = "com.mudita.kompakt:about-libraries", version.ref = "about-libraries" }
 accompanistPager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanistPagerIndicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
@@ -88,6 +91,7 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
+about-libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libraries-plugin" }
 artifactory = { id = "com.jfrog.artifactory", version = "4.31.0" }
 kotlinComposeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 download = { id = "de.undercouch.download", version = "4.1.1" }

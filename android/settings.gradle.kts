@@ -9,6 +9,7 @@ pluginManagement {
     extra["muditaPassword"] = properties.getProperty("mudita_repo_password")
         ?: System.getenv("ARTIFACTORY_PASSWORD")
     extra["muditaRepoUrl"] = properties.getProperty("mudita_nexus_repo_url")
+        ?: System.getenv("MUDITA_PRIVATE_REPOSITORY_URL")
 
     repositories {
         mavenCentral()

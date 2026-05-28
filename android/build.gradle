@@ -32,6 +32,7 @@ plugins {
     alias libs.plugins.hiltAndroid apply false
     alias libs.plugins.kotlinSerialization apply false
     alias libs.plugins.kotlinComposeCompiler apply false
+    alias libs.plugins.about.libraries apply false
 }
 
 def licenseeSupportedPlugins = [
@@ -58,7 +59,7 @@ allprojects {
 
         def muditaRepoUsername = getLocalProperty("mudita_repo_username") ?: System.getenv("ARTIFACTORY_USERNAME")
         def muditaRepoPassword = getLocalProperty("mudita_repo_password") ?: System.getenv("ARTIFACTORY_PASSWORD")
-        def muditaNexusRepoUrl = getLocalProperty("mudita_nexus_repo_url")
+        def muditaNexusRepoUrl = getLocalProperty("mudita_nexus_repo_url") ?: System.getenv("MUDITA_PRIVATE_REPOSITORY_URL")
 
         maven {
             url = uri(muditaNexusRepoUrl)

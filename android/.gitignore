@@ -44,3 +44,6 @@ build
 
 CompactUI
 mudita-compact-ui
+
+# Build artifacts
+aboutlibraries.json

@@ -25,7 +25,6 @@ dist/
 
 gen/
 local.properties
-raw/
 obj/
 libgnustl/
 libc++/
@@ -75,3 +74,13 @@ assets/proj.db
 
 # c++
 /.cxx
+
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Build artifacts
+**/output-metadata.json
+*.dm

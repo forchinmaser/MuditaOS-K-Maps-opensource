@@ -80,12 +80,12 @@ fun NavigationPointItem.displayableAddress(): String =
         when (this) {
             is NavigationPointItem.Destination -> stringResource(id = string.maps_planningroute_placeholder_adddestination)
             is NavigationPointItem.Intermediate -> stringResource(id = string.maps_planningroute_placeholder_addstop)
-            is NavigationPointItem.Start -> stringResource(id = string.common_label_currentlocation)
+            is NavigationPointItem.Start -> stringResource(id = string.weather_main_screentitle_currentlocation)
         }
     } else {
         when (this) {
             is NavigationPointItem.Start -> {
-                if (isCurrentLocation) stringResource(id = string.common_label_currentlocation) else address
+                if (isCurrentLocation) stringResource(id = string.weather_main_screentitle_currentlocation) else address
             }
 
             else -> address

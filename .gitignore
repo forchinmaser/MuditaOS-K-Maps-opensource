@@ -1,2 +1,8 @@
 .idea/
 .repo/
+
+# MacOSX
+.DS_Store
+
+/raw-voices
+/scripts/*.csv

@@ -68,17 +68,18 @@ fun NavigationPointSelectionBottomSheet(
             attributes = KompaktButtonAttributes.Medium,
             onClick = onSearchSelect,
         )
-        if (!BuildConfig.IS_PREMIERE_VERSION) {
-            KompaktSecondaryButton(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                text = stringResource(string.common_label_savedlocations),
-                iconResId = commonR.drawable.icon_star_outlined,
-                attributes = KompaktButtonAttributes.Medium,
-                onClick = onSavedLocationsSelect
-            )
-        }
+        // TODO Restore once saved location feature will be re-designed
+        // if (!BuildConfig.IS_PREMIERE_VERSION) {
+        //     KompaktSecondaryButton(
+        //         modifier = Modifier
+        //             .fillMaxWidth()
+        //             .padding(horizontal = 16.dp),
+        //         text = stringResource(string.common_label_savedlocations),
+        //         iconResId = commonR.drawable.icon_star_outlined,
+        //         attributes = KompaktButtonAttributes.Medium,
+        //         onClick = onSavedLocationsSelect
+        //     )
+        // }
         KompaktSecondaryButton(
             modifier = Modifier
                 .fillMaxWidth()

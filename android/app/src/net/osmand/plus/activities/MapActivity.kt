@@ -729,10 +729,13 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                         MenuScreen { item ->
                             when (item) {
                                 null -> navController.navigateUp()
-                                MenuItem.About -> Unit
-                                MenuItem.History -> navController.navigate(Screen.SearchHistory.route)
+                                // TODO Restore once about feature will be re-designed
+                                // MenuItem.About -> Unit
+                                // TODO Restore once search history feature will be re-designed
+                                // MenuItem.History -> navController.navigate(Screen.SearchHistory.route)
                                 MenuItem.ManageMaps -> navController.navigate(Screen.Download.route)
-                                MenuItem.SavedLocation -> navController.navigate("${Screen.MyPlaces.route}/null")
+                                // TODO Restore once saved location feature will be re-designed
+                                // MenuItem.SavedLocation -> navController.navigate("${Screen.MyPlaces.route}/null")
                                 MenuItem.Navigation -> {
                                     lifecycleScope.launch(Dispatchers.IO) { clearNavigation() }
                                     val navigationItem = NavigationItem(

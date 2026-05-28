@@ -11,7 +11,7 @@ import com.mudita.maps.frontitude.R
 @Preview
 fun GPSErrorBottomSheet(
     modifier: Modifier = Modifier,
-    description: String = stringResource(R.string.maps_common_error_dialog_body_checkpsis),
+    description: String = stringResource(R.string.maps_common_error_dialog_body_checkyouhaveaclear),
     onCloseClick: () -> Unit = {},
 ) {
     VerticalConfirmationDialog(

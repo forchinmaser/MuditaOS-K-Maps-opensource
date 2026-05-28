@@ -9,18 +9,20 @@ sealed class MenuItem(
     @StringRes val title: Int,
     @DrawableRes val icon: Int,
 ) {
-    object SavedLocation : MenuItem(
-        title = R.string.common_label_savedlocations,
-        icon = commonR.drawable.icon_border_my_places
-    )
+    // TODO Restore once saved location feature will be re-designed
+    // object SavedLocation : MenuItem(
+    //     title = R.string.common_label_savedlocations,
+    //     icon = commonR.drawable.icon_border_my_places
+    // )
     object ManageMaps : MenuItem(
         title = R.string.common_label_managemaps,
         icon = commonR.drawable.icon_border_download
     )
-    object History : MenuItem(
-        title = R.string.common_label_searchhistory,
-        icon = commonR.drawable.icon_border_history
-    )
+    // TODO Restore once search history feature will be re-designed
+    // object History : MenuItem(
+    //     title = R.string.common_label_searchhistory,
+    //     icon = commonR.drawable.icon_border_history
+    // )
     object Navigation : MenuItem(
         title = R.string.maps_menu_menuitem_planroute,
         icon = commonR.drawable.icon_border_navigation
@@ -29,8 +31,9 @@ sealed class MenuItem(
         title = R.string.common_label_settings,
         icon = commonR.drawable.icon_border_settings
     )
-    object About : MenuItem(
-        title = R.string.common_label_about,
-        icon = commonR.drawable.icon_border_about
-    )
+    // TODO Restore once about feature will be re-designed
+    // object About : MenuItem(
+    //     title = R.string.common_label_about,
+    //     icon = commonR.drawable.icon_border_about
+    // )
 }

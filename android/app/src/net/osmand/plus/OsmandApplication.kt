@@ -165,7 +165,7 @@ class OsmandApplication : Application() {
             dsn = SENTRY_DSN,
             proguardUuid = PROGUARD_UUID,
             environment = BUILD_TYPE,
-            isDebug = DEBUG,
+            isEnabled = !DEBUG,
         )
 
         if (RestartActivity.isRestartProcess(this)) {

@@ -1,3 +1,6 @@
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import com.mikepenz.aboutlibraries.plugin.DuplicateMode
+import com.mikepenz.aboutlibraries.plugin.DuplicateRule
 import tasks.DeployTask
 import tasks.GenerateChangelogTask
 
@@ -9,6 +12,7 @@ apply from: '../compose/common/build-common.gradle'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.dagger.hilt.android'
 apply plugin: "org.jetbrains.kotlin.plugin.compose"
+apply plugin: "com.mikepenz.aboutlibraries.plugin"
 
 apply from: rootProject.file("test-common.gradle")
 apply from: "$rootDir/gradle/sentry-config.gradle"
@@ -32,14 +36,14 @@ android {
 		}
 	}
 
-	def sentryDsn = getLocalProperty("sentry_dsn", "")
+	def sentryDsn = System.getenv("SENTRY_DSN") ?: getLocalProperty("sentry_dsn", "")
 
 	defaultConfig {
 		compileSdk compile_sdk
 		minSdkVersion min_sdk
 		targetSdkVersion target_sdk
-		versionCode 26
-		versionName "1.1.0"
+		versionCode = (System.getenv("VERSION_CODE")?.toInteger()) ?: 1
+		versionName = "1.2.0"
 		dimension "version"
 		applicationId "com.mudita.maps"
 		resValue "string", "app_name", "Maps"
@@ -113,10 +117,31 @@ android {
 			signingConfig signingConfigs.development
 			minifyEnabled false
 		}
+		qa {
+			minifyEnabled true
+			matchingFallbacks = ['release']
+			signingConfig signingConfigs.publishing
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
 		release {
 			signingConfig signingConfigs.publishing
 			minifyEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+	}
+
+	android.applicationVariants.configureEach { variant ->
+        preBuildProvider.configure {
+            dependsOn("exportLibraryDefinitions")
+        }
+		variant.outputs.configureEach { output ->
+			def outputImpl = output as BaseVariantOutputImpl
+			def appName = variant.applicationId.split("\\.").last()
+			def appVersion = variant.versionName
+			def buildType = variant.buildType.name
+			def versionCode = variant.versionCode
+			def newApkName = "${appName}-${appVersion}(${versionCode})-${buildType}.apk"
+			outputImpl.outputFileName = newApkName
 		}
 	}
 
@@ -154,6 +179,21 @@ android {
 		exclude("META-INF/*.kotlin_module")
 		exclude("META-INF/gradle/*")
 	}
+}
+
+aboutLibraries {
+    def ghToken = System.getenv("GITHUB_TOKEN")
+    if (ghToken != null) {
+        fetchRemoteLicense true
+        gitHubApiToken ghToken
+    }
+
+    exclusionPatterns = [~/com\.mudita[.:].*/]
+
+    duplicationMode = DuplicateMode.MERGE
+    duplicationRule = DuplicateRule.SIMPLE
+
+    configPath = "config"
 }
 
 afterEvaluate {
@@ -197,6 +237,8 @@ dependencies {
 	new File(rootProject.projectDir.absolutePath, "compose/screens")
 			.listFiles()
 	        .each  { moduleFile -> implementation project(":${moduleFile.name}")}
+
+    implementation(libs.about.libraries)
 
 	implementation(libs.splashcreen)
     implementation(libs.hiltAndroid)

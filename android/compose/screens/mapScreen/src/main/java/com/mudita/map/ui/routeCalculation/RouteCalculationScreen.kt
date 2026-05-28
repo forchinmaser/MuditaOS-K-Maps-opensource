@@ -72,7 +72,7 @@ fun RouteCalculationScreen(
             Text(
                 modifier = Modifier.padding(top = 8.dp),
                 text = when (stage) {
-                    RouteCalculationState.InProgress.Stage.Started -> stringResource(string.maps_routeplanning_body_thiscantakeupto7)
+                    RouteCalculationState.InProgress.Stage.Started -> stringResource(string.maps_routeplanning_body_thiscantakeawhile)
                     RouteCalculationState.InProgress.Stage.Alert -> stringResource(string.maps_routeplanning_body_thecalculationistaking)
                     RouteCalculationState.InProgress.Stage.Continued -> stringResource(string.maps_routeplanning_body_calculationtimesoften)
                 },
