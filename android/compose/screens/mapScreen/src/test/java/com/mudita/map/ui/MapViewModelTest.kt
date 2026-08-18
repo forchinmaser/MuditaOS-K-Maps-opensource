@@ -17,6 +17,7 @@ import com.mudita.map.common.model.navigation.NavigationPointType
 import com.mudita.map.common.model.navigation.getLatLons
 import com.mudita.map.common.model.routing.RoadDetails
 import com.mudita.map.common.model.routing.RouteDirectionInfo
+import com.mudita.map.common.model.routing.TransitLeg
 import com.mudita.map.common.navigation.IntermediatePointReachedUseCase
 import com.mudita.map.common.navigation.StopVoiceRouterUseCase
 import com.mudita.map.common.repository.SettingsRepository
@@ -966,6 +967,36 @@ class MapViewModelTest {
         assertEquals(NavigationTime.Minutes(30), routeState.estimatedRouteTime)
         assertTrue(routeState.navigationSteps.isEmpty())
         assertTrue(mapViewModel.uiState.value.screenState is ScreenState.NavigationInProgress)
+    }
+
+    @Test
+    fun `updateTransportNavigationProperties should store the given transit legs in routeState`() = runTest {
+        // Given
+        every { osmAndFormatter.getFormattedDistanceValue(any()) } returns OsmAndFormatter.FormattedValue("", "")
+        mapViewModel.prepareForNavigation(getDummyNavigationItem(), null)
+        mapViewModel.onRouteLoading()
+        val legs = listOf(
+            TransitLeg.Walk(distanceMeters = 350, timeSeconds = 300, toStopName = "86 St"),
+            TransitLeg.Ride(
+                routeRef = "4",
+                routeType = "subway",
+                fromStopName = "86 St",
+                toStopName = "Union Sq - 14 St",
+                stopCount = 5,
+                timeSeconds = 780,
+            ),
+        )
+
+        // When
+        mapViewModel.updateTransportNavigationProperties(
+            estimatedRouteDistance = 0,
+            estimatedRouteTime = 0,
+            hasRoute = true,
+            legs = legs,
+        )
+
+        // Then
+        assertEquals(legs, mapViewModel.routeState.value.transitLegs)
     }
 
     @Test
