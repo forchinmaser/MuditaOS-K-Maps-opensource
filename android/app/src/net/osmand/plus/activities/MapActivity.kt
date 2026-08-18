@@ -48,6 +48,7 @@ import com.mudita.map.common.model.navigation.NavigationPoint
 import com.mudita.map.common.model.navigation.NavigationPointType
 import com.mudita.map.common.model.navigation.bottomRightMostLatLon
 import com.mudita.map.common.model.navigation.topLeftMostLatLon
+import com.mudita.map.common.model.routing.TransitLeg
 import com.mudita.map.common.navigation.Screen
 import com.mudita.map.common.navigation.data.NavigationItemParamType
 import com.mudita.map.common.navigation.data.SavedPlaceDataParamType
@@ -111,6 +112,7 @@ import net.osmand.plus.routing.IRouteInformationListener
 import net.osmand.plus.routing.RouteCalculationProgressListener
 import net.osmand.plus.routing.RouteCalculationResult
 import net.osmand.plus.routing.RoutingHelper
+import net.osmand.plus.routing.TransportRoutingHelper
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener
@@ -129,6 +131,8 @@ import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener
 import net.osmand.plus.views.corenative.NativeCoreContext
 import net.osmand.plus.views.listeners.MapGestureListener
 import net.osmand.router.GeneralRouter
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment
+import net.osmand.router.TransportRouteResult
 import net.osmand.router.errors.RouteCalculationError
 import net.osmand.search.SearchUICore
 import net.osmand.util.Algorithms
@@ -271,6 +275,11 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                         estimatedRouteDistance = result?.travelDist?.toInt() ?: 0,
                         estimatedRouteTime = result?.travelTime?.toInt() ?: 0,
                         hasRoute = result != null,
+                        legs = if (result != null && transportHelper != null) {
+                            buildTransitLegs(result, transportHelper)
+                        } else {
+                            emptyList()
+                        },
                     )
                 }
 
@@ -1489,6 +1498,53 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                 }
             }
         }
+    }
+
+    /**
+     * Converts a calculated transit itinerary into the plain [TransitLeg] list the compose UI
+     * renders. Walk legs come from [TransportRoutingHelper.getWalkingRouteSegment] (the actual
+     * calculated connector route, keyed on the segment pair either side of the walk, with a null
+     * endpoint standing in for the trip's start/end) rather than TransportRouteResultSegment's own
+     * walkTime/walkDist fields, since those are populated for the graph-search heuristic and this
+     * wants the same walking route RouteLayer already draws.
+     */
+    private fun buildTransitLegs(result: TransportRouteResult, transportHelper: TransportRoutingHelper): List<TransitLeg> {
+        val legs = mutableListOf<TransitLeg>()
+        var prevSegment: TransportRouteResultSegment? = null
+        for (segment in result.segments) {
+            val walk = transportHelper.getWalkingRouteSegment(prevSegment, segment)
+            if (walk != null && walk.wholeDistance > 0) {
+                legs.add(
+                    TransitLeg.Walk(
+                        distanceMeters = walk.wholeDistance,
+                        timeSeconds = walk.routingTime.toInt(),
+                        toStopName = segment.getStart()?.name,
+                    )
+                )
+            }
+            legs.add(
+                TransitLeg.Ride(
+                    routeRef = segment.route?.ref.orEmpty(),
+                    routeType = segment.route?.type.orEmpty(),
+                    fromStopName = segment.getStart()?.name.orEmpty(),
+                    toStopName = segment.getEnd()?.name.orEmpty(),
+                    stopCount = segment.end - segment.start,
+                    timeSeconds = segment.travelTime.toInt(),
+                )
+            )
+            prevSegment = segment
+        }
+        val finalWalk = transportHelper.getWalkingRouteSegment(prevSegment, null)
+        if (finalWalk != null && finalWalk.wholeDistance > 0) {
+            legs.add(
+                TransitLeg.Walk(
+                    distanceMeters = finalWalk.wholeDistance,
+                    timeSeconds = finalWalk.routingTime.toInt(),
+                    toStopName = null,
+                )
+            )
+        }
+        return legs
     }
 
     override fun newRouteIsCalculated(newRoute: Boolean, showToast: ValueHolder<Boolean>) {

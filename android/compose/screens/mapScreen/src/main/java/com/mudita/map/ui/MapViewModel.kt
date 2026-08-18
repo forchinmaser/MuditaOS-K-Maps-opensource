@@ -18,6 +18,7 @@ import com.mudita.map.common.model.navigation.NavigationPointType
 import com.mudita.map.common.model.navigation.activated
 import com.mudita.map.common.model.navigation.getLatLons
 import com.mudita.map.common.model.routing.RouteDirectionInfo
+import com.mudita.map.common.model.routing.TransitLeg
 import com.mudita.map.common.navigation.IntermediatePointReachedUseCase
 import com.mudita.map.common.navigation.StopVoiceRouterUseCase
 import com.mudita.map.common.repository.SettingsRepository
@@ -1095,7 +1096,12 @@ class MapViewModel @Inject constructor(
      * surfaces distance/time and exits the "Calculating..." state so the route (already drawn on
      * the map by RouteLayer) is reachable.
      */
-    fun updateTransportNavigationProperties(estimatedRouteDistance: Int, estimatedRouteTime: Int, hasRoute: Boolean) {
+    fun updateTransportNavigationProperties(
+        estimatedRouteDistance: Int,
+        estimatedRouteTime: Int,
+        hasRoute: Boolean,
+        legs: List<TransitLeg> = emptyList(),
+    ) {
         cancelRouteCalculationMemoryJob()
 
         val screenState = uiState.value.screenState
@@ -1113,6 +1119,7 @@ class MapViewModel @Inject constructor(
                 estimatedRouteDistance = osmAndFormatter.getFormattedDistanceValue(estimatedRouteDistance.toFloat()).formattedValue,
                 estimatedRouteTime = NavigationTime.create(estimatedRouteTime),
                 navigationSteps = emptyList(),
+                transitLegs = legs,
                 searchItem = null,
                 missingMaps = emptyList(),
             )

@@ -74,6 +74,7 @@
   <string name="maps_common_dialog_h1_selectlocationonmap">Select location on map</string>
   <string name="maps_common_error_body_downloadtheregionmaptosee">Download %s to see more detail</string>
   <string name="maps_common_error_dialog_body_checkyouhaveaclear">Check you have a clear line of sight to the sky and share current location is enabled</string>
+  <string name="maps_common_label_boardroute">Board %1$s to %2$s</string>
   <string name="maps_common_label_city">City</string>
   <string name="maps_common_label_district">District</string>
   <string name="maps_common_label_from">From</string>
@@ -84,6 +85,8 @@
   <string name="maps_common_label_town">Town</string>
   <string name="maps_common_label_via">Via</string>
   <string name="maps_common_label_village">Village</string>
+  <string name="maps_common_label_walktodestination">Walk to destination</string>
+  <string name="maps_common_label_walktostop">Walk to %s</string>
   <string name="maps_common_screentitle_menu">Menu</string>
   <string name="maps_common_searchbar_placeholder_searchforanaddress">Search for an address</string>
   <string name="maps_common_searchbar_placeholder_searchformaps">Search for maps</string>

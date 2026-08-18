@@ -40,6 +40,7 @@ import com.mudita.map.ui.buttons.CenterNavigationMapButton
 import com.mudita.map.ui.buttons.MapButtons
 import com.mudita.map.ui.buttons.PickLocationMapButtons
 import com.mudita.map.ui.commandView.CommandNavigationView
+import com.mudita.map.ui.commandView.TransitItineraryView
 import com.mudita.map.ui.dialogs.LocationSharingDialog
 import com.mudita.map.ui.errors.GPSErrorBottomSheet
 import com.mudita.map.ui.intro.MapsWelcomeScreen
@@ -162,6 +163,14 @@ fun MapScreen(
             screenState is ScreenState.WelcomeToMaps -> {
                 MapsWelcomeScreen(
                     onContinueClick = onIntroContinueClick,
+                )
+            }
+
+            screenState is ScreenState.NavigationInProgress && navigationDisplayMode is NavigationDisplayMode.Commands &&
+                mapViewModel.selectedNavigationModeItem == NavigationModeItem.Transit -> {
+                TransitItineraryView(
+                    legs = routeState.transitLegs,
+                    onEndRouteClick = { mapViewModel.goBackToPlanRoute() },
                 )
             }
 

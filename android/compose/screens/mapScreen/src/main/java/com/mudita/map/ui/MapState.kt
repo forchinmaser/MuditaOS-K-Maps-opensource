@@ -4,6 +4,7 @@ import com.mudita.map.common.model.MyPlaceItem
 import com.mudita.map.common.model.SearchItem
 import com.mudita.map.common.model.navigation.NavigationItem
 import com.mudita.map.common.model.routing.RouteDirectionInfo
+import com.mudita.map.common.model.routing.TransitLeg
 import com.mudita.map.repository.NavigationDisplayMode
 import com.mudita.map.repository.NavigationModeItem
 import com.mudita.map.ui.routeCalculation.RouteCalculationState
@@ -16,6 +17,7 @@ data class RouteState(
     val finalLocation: LatLon? = null,
     val routeDirections: List<RouteDirectionInfo> = emptyList(),
     val navigationSteps: List<NavigationStep> = emptyList(),
+    val transitLegs: List<TransitLeg> = emptyList(),
     val estimatedRouteTime: NavigationTime? = null,
     val estimatedRouteDistance: String? = null,
     val missingMaps: List<String> = emptyList(),
