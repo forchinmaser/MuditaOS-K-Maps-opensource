@@ -12,7 +12,6 @@ import net.osmand.data.QuadRect
 import net.osmand.data.RotatedTileBox
 import net.osmand.data.TransportStop
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.views.OsmandMapTileView
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider
 import net.osmand.plus.views.layers.base.OsmandMapLayer
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider
@@ -95,10 +94,6 @@ class TransportStopsLayer(context: Context) : OsmandMapLayer(context), IContextM
             provider.clearSymbols(mapRenderer)
         }
         stopsTileProvider = null
-    }
-
-    override fun initLayer(view: OsmandMapTileView) {
-        super.initLayer(view)
     }
 
     override fun destroyLayer() {
