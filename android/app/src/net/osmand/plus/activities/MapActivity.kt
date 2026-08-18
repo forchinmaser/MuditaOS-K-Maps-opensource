@@ -350,6 +350,10 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                 mapLayers?.contextMenuLayer?.shouldSearchAmenities = {
                     mapViewModel.uiState.value.screenState.amenitySearchEnabled
                 }
+                mapLayers?.contextMenuLayer?.onTransportStopTapCallback = { stop ->
+                    mapViewModel.onTransportStopSelected(stop)
+                    removeAllMarkers()
+                }
                 NavHost(
                     navController = navController,
                     startDestination = Screen.Map.ROUTE_WITH_ARGS,
@@ -785,6 +789,9 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                                     is SettingItem.ScreenAlwaysOn -> Unit
                                     is SettingItem.Sound -> appSettings?.VOICE_MUTE?.set(item.isChecked)
                                     is SettingItem.WifiOnly -> Unit
+                                    // No immediate engine-side push needed: TransportStopsLayer polls
+                                    // the persisted "show_transport_stops" flag every frame.
+                                    is SettingItem.TransportStops -> Unit
                                 }
                             },
                             onItemChecked = ::onSettingsItemChecked,

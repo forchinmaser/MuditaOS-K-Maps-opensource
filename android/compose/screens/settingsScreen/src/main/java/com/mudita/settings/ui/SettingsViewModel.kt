@@ -64,6 +64,7 @@ class SettingsViewModel @Inject constructor(
             is SettingItem.ScreenAlwaysOn -> settingsRepository.saveScreenAlwaysOnEnabled(settingItem.isChecked)
             is SettingItem.Sound -> settingsRepository.saveSoundEnabled(settingItem.isChecked.not()) // isSoundEnabled = isMuted.not() = isChecked.not()
             is SettingItem.WifiOnly -> settingsRepository.saveWifiOnlyEnabled(settingItem.isChecked)
+            is SettingItem.TransportStops -> settingsRepository.saveShowTransitStopsEnabled(settingItem.isChecked)
         }
     }
 

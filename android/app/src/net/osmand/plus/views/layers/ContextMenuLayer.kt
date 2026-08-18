@@ -26,6 +26,7 @@ import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.data.PointDescription
 import net.osmand.data.RotatedTileBox
+import net.osmand.data.TransportStop
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.NativeUtilities
@@ -43,6 +44,10 @@ open class ContextMenuLayer(context: Context) : OsmandMapLayer(context) {
     var onLongPressCallback: (LatLon) -> Boolean = { true }
     var onSinglePressCallback: (LatLon, Amenity?) -> Unit = { _, _ -> }
     var shouldSearchAmenities: (() -> Boolean)? = null
+
+    // Additive, independent of onSinglePressCallback: only consulted when no amenity was hit, so
+    // existing amenity-tap and select-on-map behavior above is unchanged either way.
+    var onTransportStopTapCallback: ((TransportStop) -> Unit)? = null
 
     var cancelApplyingNewMarkerPosition = false
         private set
@@ -308,6 +313,15 @@ open class ContextMenuLayer(context: Context) : OsmandMapLayer(context) {
             )
         } else {
             null
+        }
+        if (amenity == null) {
+            val tappedStop = onTransportStopTapCallback?.let {
+                view.getLayerByClass(TransportStopsLayer::class.java)?.findStopFromPoint(point, tileBox)
+            }
+            if (tappedStop != null) {
+                onTransportStopTapCallback?.invoke(tappedStop)
+                return true
+            }
         }
         onSinglePressCallback(latlon, amenity)
         return false

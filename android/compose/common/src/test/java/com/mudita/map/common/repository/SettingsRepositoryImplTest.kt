@@ -47,6 +47,19 @@ class SettingsRepositoryImplTest {
 
 
     @Test
+    fun `Given transit stops option is set to true, when getSettingsItems called, should return this option as checked`() {
+        // Given
+        every { settingsPreference.getShowTransitStopsEnabled() } returns true
+
+        // When
+        val result = settingsRepository.getSettingsItems(hasSDCard = false)
+
+        // Then
+        val transitStopsOption = result.find { it is SettingItem.TransportStops } as SettingItem.TransportStops
+        assertTrue(transitStopsOption.isChecked)
+    }
+
+    @Test
     fun `Given distance unit is set to kilometers, when getSettingsItems called, should return kilometers option as selected`() {
         // Given
         every { metricUnitPreference.getMetricUnit() } returns "km-m"
@@ -159,6 +172,15 @@ class SettingsRepositoryImplTest {
 
         // Then
         verify { settingsPreference.setWifiOnlyEnabled(true) }
+    }
+
+    @Test
+    fun `When saveShowTransitStopsEnabled called, should save value for this option`() {
+        // When
+        settingsRepository.saveShowTransitStopsEnabled(true)
+
+        // Then
+        verify { settingsPreference.setShowTransitStopsEnabled(true) }
     }
 
     @Test

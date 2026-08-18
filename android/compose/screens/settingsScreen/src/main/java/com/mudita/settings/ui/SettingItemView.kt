@@ -227,6 +227,7 @@ fun Switch(
                     is SettingItem.Sound -> settingItem.copy(isChecked = isSwitched.not())
                     is SettingItem.ScreenAlwaysOn -> settingItem.copy(isChecked = isSwitched.not())
                     is SettingItem.WifiOnly -> settingItem.copy(isChecked = isSwitched.not())
+                    is SettingItem.TransportStops -> settingItem.copy(isChecked = isSwitched.not())
                     else -> settingItem
                 }
             )

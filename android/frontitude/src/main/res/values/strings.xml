@@ -57,6 +57,7 @@
   <string name="common_status_updateavalible">Update available</string>
   <string name="common_toast_storagelocationchanged">Storage location changed</string>
   <string name="common_toggle_button_h1_screenalwayson">Screen always on </string>
+  <string name="common_toggle_button_h1_transitstops">Transit stops</string>
   <string name="common_toggle_button_h1_wifionly">Wi-Fi downloads only </string>
   <string name="map_common_dialog_h1_deletemap">Delete map\?</string>
   <string name="map_common_dialog_h1_selectlocationusing">Select location using:</string>
@@ -116,6 +117,7 @@
   <string name="maps_mapview_dialog_h1_missingregionmap">Missing region map</string>
   <string name="maps_menu_menuitem_planroute">Plan Route</string>
   <string name="maps_menu_toggle_button_body_offlinemapswill">Offline maps will only download when Wi-Fi is connected</string>
+  <string name="maps_menu_toggle_button_body_showtransitstops">Show subway and bus stops on the map</string>
   <string name="maps_menu_toggle_button_body_stopsthescreenlocking">Stops the screen locking during navigation</string>
   <string name="maps_navigation_label_center">Center</string>
   <string name="maps_offlinenavigation_h1_welcometomaps">Welcome to Maps</string>

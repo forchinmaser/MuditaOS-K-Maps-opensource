@@ -60,6 +60,12 @@ sealed class SettingItem(
         override var isChecked: Boolean = false
     ) : SettingItem(title, desc), SettingItemAction.Switchable
 
+    data class TransportStops(
+        @StringRes override val title: Int,
+        @StringRes override val desc: Int? = null,
+        override var isChecked: Boolean = false
+    ) : SettingItem(title, desc), SettingItemAction.Switchable
+
     data class Storage(
         @StringRes override val title: Int,
         @StringRes override val desc: Int? = null,

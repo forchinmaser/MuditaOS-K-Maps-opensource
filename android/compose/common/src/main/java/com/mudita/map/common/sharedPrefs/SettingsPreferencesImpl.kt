@@ -9,6 +9,11 @@ class SettingsPreferencesImpl @Inject constructor(private val sharedPreferences:
         const val SOUND_KEY = "sound"
         const val SCREEN_ALWAYS_ON_KEY = "screen_always_on"
         const val WIFI_ONLY_KEY = "wifi_only"
+
+        // Shared with the legacy map-renderer side: net.osmand.plus.views.layers.TransportStopsLayer
+        // reads this same key from the same "mudita_map_prefs" SharedPreferences file directly,
+        // since that layer lives in the :app module and isn't Hilt-injected. Keep both in sync.
+        const val TRANSIT_STOPS_KEY = "show_transport_stops"
     }
 
     private val soundChangedListeners = mutableListOf<(Boolean) -> Unit>()
@@ -48,5 +53,11 @@ class SettingsPreferencesImpl @Inject constructor(private val sharedPreferences:
 
     override fun setWifiOnlyEnabled(enabled: Boolean) {
         sharedPreferences.edit().putBoolean(WIFI_ONLY_KEY, enabled).apply()
+    }
+
+    override fun getShowTransitStopsEnabled(): Boolean = sharedPreferences.getBoolean(TRANSIT_STOPS_KEY, true)
+
+    override fun setShowTransitStopsEnabled(enabled: Boolean) {
+        sharedPreferences.edit().putBoolean(TRANSIT_STOPS_KEY, enabled).apply()
     }
 }

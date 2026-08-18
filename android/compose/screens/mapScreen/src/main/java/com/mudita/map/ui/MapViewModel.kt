@@ -4,6 +4,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mudita.map.common.R as commonR
 import com.mudita.map.common.di.DispatcherQualifier
 import com.mudita.map.common.geocode.GeocodingAddress
 import com.mudita.map.common.maps.GetMissingMapsUseCase
@@ -79,6 +80,7 @@ import kotlinx.coroutines.withContext
 import net.osmand.Location
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
+import net.osmand.data.TransportStop
 import net.osmand.router.errors.RouteCalculationError
 import net.osmand.util.MapUtils
 
@@ -721,6 +723,15 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    fun onTransportStopSelected(stop: TransportStop) {
+        // Scoped to Idle only: unlike onSinglePressed, this callback fires regardless of
+        // screenState (see ContextMenuLayer.onTransportStopTapCallback), so states with their own
+        // tap semantics (e.g. SelectLocation) are deliberately left alone here.
+        if (uiState.value.screenState is ScreenState.Idle) {
+            selectTransportStop(stop)
+        }
+    }
+
     fun checkMissingRegion(latLon: LatLon?) {
         viewModelScope.launch { latLonsToProcess.emit(latLon) }
     }
@@ -765,6 +776,35 @@ class MapViewModel @Inject constructor(
             )
         )
     }
+
+    private fun selectTransportStop(stop: TransportStop) {
+        val location = stop.location ?: return
+        val distance = routeState.value.currentLocation?.let { calculateDistance(it, location) }
+        val stopName = stop.name?.takeUnless { it.isBlank() || it == TransportStop.MISSING_STOP_NAME }
+
+        setSearchItem(
+            SearchItem(
+                id = UUID.randomUUID(),
+                latLon = location,
+                itemType = SearchItemType.POI,
+                localName = stopName ?: "Transit stop",
+                typeName = stop.routesLabel(),
+                distance = distance,
+                icon = commonR.drawable.mm_public_transport,
+            )
+        )
+    }
+
+    // Route refs (e.g. "4", "Q44-SBS") are printed as-is, not translated, so this needs no
+    // localization; falls back to a plain label when the map has no route data for this stop.
+    private fun TransportStop.routesLabel(): String =
+        routes
+            ?.mapNotNull { it.ref?.takeUnless(String::isBlank) }
+            ?.distinct()
+            ?.take(4)
+            ?.takeUnless { it.isEmpty() }
+            ?.joinToString(", ")
+            ?: "Transit stop"
 
     private fun Amenity.getDisplayNameAndType(): Pair<String, String> =
         getName(getDefaultLanguage())

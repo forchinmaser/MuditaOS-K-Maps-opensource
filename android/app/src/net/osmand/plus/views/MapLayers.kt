@@ -37,6 +37,7 @@ import net.osmand.plus.views.layers.PointLocationLayer
 import net.osmand.plus.views.layers.PointNavigationLayer
 import net.osmand.plus.views.layers.PreviewRouteLineLayer
 import net.osmand.plus.views.layers.RouteLayer
+import net.osmand.plus.views.layers.TransportStopsLayer
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.ViewCreator
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
@@ -65,6 +66,9 @@ class MapLayers(private val app: OsmandApplication) {
     val poiMapLayer: POIMapLayer? by lazy {
         // POIMapLayer(app) // NOT USED AT THE MOMENT
         null
+    }
+    val transportStopsLayer: TransportStopsLayer by lazy {
+        TransportStopsLayer(app)
     }
     val locationLayer: PointLocationLayer by lazy {
         PointLocationLayer(app)
@@ -109,6 +113,8 @@ class MapLayers(private val app: OsmandApplication) {
         // 2. osm bugs layer
         // 3. poi layer
         // mapView.addLayer(poiMapLayer, 3f) // NOT USED AT THE MOMENT
+        // 3.2 transit stop icons (subway/bus/tram), gated on SHOW_TRANSPORT_STOPS internally
+        mapView.addLayer(transportStopsLayer, 3.2f)
         // 5.95 all text labels
         // 6. point location layer
         mapView.addLayer(locationLayer, 6f)

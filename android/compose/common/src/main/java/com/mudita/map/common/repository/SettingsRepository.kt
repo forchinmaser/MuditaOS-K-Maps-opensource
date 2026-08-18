@@ -17,4 +17,6 @@ interface SettingsRepository {
     fun getScreenAlwaysOn(): Boolean
 
     fun saveWifiOnlyEnabled(enabled: Boolean)
+
+    fun saveShowTransitStopsEnabled(enabled: Boolean)
 }

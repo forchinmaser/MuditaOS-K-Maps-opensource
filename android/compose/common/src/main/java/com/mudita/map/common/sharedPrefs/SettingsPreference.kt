@@ -11,4 +11,7 @@ interface SettingsPreference {
 
     fun getWifiOnlyEnabled(): Boolean
     fun setWifiOnlyEnabled(enabled: Boolean)
+
+    fun getShowTransitStopsEnabled(): Boolean
+    fun setShowTransitStopsEnabled(enabled: Boolean)
 }

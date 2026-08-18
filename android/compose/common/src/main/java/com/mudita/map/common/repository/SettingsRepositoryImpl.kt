@@ -31,6 +31,11 @@ class SettingsRepositoryImpl @Inject constructor(
             desc = R.string.maps_menu_toggle_button_body_offlinemapswill,
             isChecked = settingsPreference.getWifiOnlyEnabled()
         ),
+        SettingItem.TransportStops(
+            title = R.string.common_toggle_button_h1_transitstops,
+            desc = R.string.maps_menu_toggle_button_body_showtransitstops,
+            isChecked = settingsPreference.getShowTransitStopsEnabled()
+        ),
         SettingItem.Storage(
             title = R.string.common_menuitem_h1_storage,
             options = storageOptions(hasSDCard)
@@ -71,6 +76,10 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override fun saveWifiOnlyEnabled(enabled: Boolean) {
         settingsPreference.setWifiOnlyEnabled(enabled)
+    }
+
+    override fun saveShowTransitStopsEnabled(enabled: Boolean) {
+        settingsPreference.setShowTransitStopsEnabled(enabled)
     }
 }
 
