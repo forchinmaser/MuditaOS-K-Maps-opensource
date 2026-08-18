@@ -944,6 +944,53 @@ class MapViewModelTest {
     }
 
     @Test
+    fun `updateTransportNavigationProperties should update state and transition to NavigationInProgress when a route was found`() = runTest {
+        // Given
+        every {
+            osmAndFormatter.getFormattedDistanceValue(START_DESTINATION_DISTANCE_METERS.toFloat())
+        } returns OsmAndFormatter.FormattedValue("130", "km", false)
+        mapViewModel.prepareForNavigation(getDummyNavigationItem(), null)
+        mapViewModel.onRouteLoading()
+        mapViewModel.routeState.update { it.copy(estimatedRouteDistance = null) }
+
+        // When
+        mapViewModel.updateTransportNavigationProperties(
+            estimatedRouteDistance = START_DESTINATION_DISTANCE_METERS.toInt(),
+            estimatedRouteTime = 1800, // 30 min
+            hasRoute = true,
+        )
+
+        // Then
+        val routeState = mapViewModel.routeState.value
+        assertEquals(START_DESTINATION_DISTANCE, routeState.estimatedRouteDistance)
+        assertEquals(NavigationTime.Minutes(30), routeState.estimatedRouteTime)
+        assertTrue(routeState.navigationSteps.isEmpty())
+        assertTrue(mapViewModel.uiState.value.screenState is ScreenState.NavigationInProgress)
+    }
+
+    @Test
+    fun `updateTransportNavigationProperties should go back to plan route with an error when no route was found`() = runTest {
+        // Given
+        mapViewModel.prepareForNavigation(getDummyNavigationItem(), null)
+        mapViewModel.onRouteLoading()
+
+        // When
+        mapViewModel.updateTransportNavigationProperties(
+            estimatedRouteDistance = 0,
+            estimatedRouteTime = 0,
+            hasRoute = false,
+        )
+
+        // Then
+        val screenState = mapViewModel.uiState.value.screenState
+        assertInstanceOf(ScreenState.PlanningRoute::class.java, screenState)
+        assertInstanceOf(
+            RouteCalculationState.Error::class.java,
+            (screenState as ScreenState.PlanningRoute).routeCalculationState,
+        )
+    }
+
+    @Test
     fun `when total estimated time is less than hour, then setLeftTotalTime should update state with total time left with minutes and seconds`() =
         runTest {
             // Given
