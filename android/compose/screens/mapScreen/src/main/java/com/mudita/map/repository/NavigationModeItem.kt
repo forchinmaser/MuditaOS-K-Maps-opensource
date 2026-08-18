@@ -23,12 +23,17 @@ enum class NavigationModeItem(
         title = string.common_label_driving,
         icon = R.drawable.ic_driving,
     ),
+    Transit(
+        title = string.maps_common_button_transit,
+        icon = R.drawable.mm_public_transport,
+    ),
     ;
 
     fun toMapType() = when (this) {
         Driving -> MapType.DRIVING
         Walking -> MapType.WALKING
         Cycling -> MapType.CYCLING
+        Transit -> MapType.TRANSIT
     }
 
     companion object {
@@ -36,6 +41,7 @@ enum class NavigationModeItem(
             MapType.DRIVING -> Driving
             MapType.WALKING -> Walking
             MapType.CYCLING -> Cycling
+            MapType.TRANSIT -> Transit
         }
     }
 }

@@ -1087,6 +1087,44 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Public-transport sibling of [updateNavigationProperties]. Transit itineraries come from
+     * TransportRoutingHelper as walk/board/transfer segments, not the RouteDirectionInfo list
+     * car/bike/foot routing produces, so there is no turn-by-turn step list to build here yet
+     * (CommandNavigationView already handles an empty navigationSteps list by design). This still
+     * surfaces distance/time and exits the "Calculating..." state so the route (already drawn on
+     * the map by RouteLayer) is reachable.
+     */
+    fun updateTransportNavigationProperties(estimatedRouteDistance: Int, estimatedRouteTime: Int, hasRoute: Boolean) {
+        cancelRouteCalculationMemoryJob()
+
+        val screenState = uiState.value.screenState
+        val isCalculatingRoute = (screenState as? ScreenState.PlanningRoute)?.isCalculating == true
+        val isNavigationInProgress = screenState is ScreenState.NavigationInProgress
+        if (!isCalculatingRoute && !isNavigationInProgress) return
+
+        if (!hasRoute) {
+            goBackToPlanRoute(calculationError = RouteCalculationError.EmptyRoute("No public transport route found"))
+            return
+        }
+
+        routeState.update {
+            it.copy(
+                estimatedRouteDistance = osmAndFormatter.getFormattedDistanceValue(estimatedRouteDistance.toFloat()).formattedValue,
+                estimatedRouteTime = NavigationTime.create(estimatedRouteTime),
+                navigationSteps = emptyList(),
+                searchItem = null,
+                missingMaps = emptyList(),
+            )
+        }
+
+        uiState.update {
+            it.copy(
+                screenState = ScreenState.NavigationInProgress(isCenterButtonVisible = it.showCenterNavigationButton)
+            )
+        }
+    }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     fun navigationRefreshFlow() = uiState
         .transformLatest {

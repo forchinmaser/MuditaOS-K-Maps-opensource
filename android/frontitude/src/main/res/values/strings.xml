@@ -65,6 +65,7 @@
   <string name="maps_common_button_cta_startroute">Start route</string>
   <string name="maps_common_button_cycling">Cycling</string>
   <string name="maps_common_button_planroute">Plan route</string>
+  <string name="maps_common_button_transit">Transit</string>
   <string name="maps_common_button_walking">Walking</string>
   <string name="maps_common_dialog_body_taponthemapto">Tap on the map to select the location</string>
   <string name="maps_common_dialog_body_youllneedtodownloadthe">You’ll need to download the map again to navigate and search this area</string>

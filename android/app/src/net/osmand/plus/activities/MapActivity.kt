@@ -251,6 +251,29 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                 routingHelper?.also(mapViewModel::updateNavigationProperties)
                 mapView?.backToLocation()
 
+                // routingHelper's own route fields (read by updateNavigationProperties above) are
+                // never populated in public-transport mode; results live on transportRoutingHelper
+                // instead, so it needs a separate bridge into the same "route ready" state.
+                // TransportRoutingHelper.setProgressBar's finish() callback (which is what invokes
+                // onCalculationFinish for this mode, see addListenersForRouting) fires right after
+                // TransportRoutingHelper's own progress-poll auto-selects route index 0 when
+                // results exist, so currentRouteResult is already reliable here; the setCurrentRoute
+                // call below is just a defensive fallback for that ordering.
+                val rh = routingHelper
+                if (rh?.isPublicTransportMode == true) {
+                    val transportHelper = rh.transportRoutingHelper
+                    val routes = transportHelper?.routes
+                    if (!routes.isNullOrEmpty() && transportHelper.currentRouteResult == null) {
+                        transportHelper.setCurrentRoute(0)
+                    }
+                    val result = transportHelper?.currentRouteResult
+                    mapViewModel.updateTransportNavigationProperties(
+                        estimatedRouteDistance = result?.travelDist?.toInt() ?: 0,
+                        estimatedRouteTime = result?.travelTime?.toInt() ?: 0,
+                        hasRoute = result != null,
+                    )
+                }
+
                 val routingAppMode = routingHelper?.appMode
                 if (routingAppMode != null) {
                     appSettings?.AUDIO_MANAGER_STREAM?.getModeValue(routingAppMode)?.let {
@@ -313,6 +336,10 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
 
             MapType.CYCLING -> {
                 ApplicationMode.BICYCLE
+            }
+
+            MapType.TRANSIT -> {
+                ApplicationMode.PUBLIC_TRANSPORT
             }
 
             else -> {
@@ -482,6 +509,7 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                                     MapType.DRIVING -> ApplicationMode.CAR
                                     MapType.WALKING -> ApplicationMode.PEDESTRIAN
                                     MapType.CYCLING -> ApplicationMode.BICYCLE
+                                    MapType.TRANSIT -> ApplicationMode.PUBLIC_TRANSPORT
                                 }
                                 mapTypesPreference.setMapType(it.toMapType())
                                 routingHelper?.onSettingsChanged(true)
@@ -919,6 +947,10 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
                                     MapType.CYCLING -> {
                                         routingHelper?.appMode = ApplicationMode.BICYCLE
                                     }
+
+                                    MapType.TRANSIT -> {
+                                        routingHelper?.appMode = ApplicationMode.PUBLIC_TRANSPORT
+                                    }
                                 }
                                 mapTypesPreference.setMapType(it.mapType)
                                 routingHelper?.onSettingsChanged(true)
@@ -1295,6 +1327,9 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
         app.downloadThread.setUiActivity(this)
 
         routingHelper?.addListener(this)
+        // RoutingHelper only forwards to its own listeners for car/bike/foot; a public-transport
+        // calculation completes through TransportRoutingHelper's separate listener list.
+        routingHelper?.transportRoutingHelper?.addListener(this)
         app.mapMarkersHelper?.addListener(this)
 
         mapView?.setOnDrawMapListener(this)
@@ -1359,6 +1394,7 @@ class MapActivity : OsmandActionBarActivity(), DownloadEvents, IRouteInformation
         mapView?.setOnDrawMapListener(null)
         app.mapMarkersHelper?.removeListener(this)
         app.routingHelper?.removeListener(this)
+        app.routingHelper?.transportRoutingHelper?.removeListener(this)
         app.downloadThread.resetUiActivity(this)
         mapViewWithLayers.onPause()
 
