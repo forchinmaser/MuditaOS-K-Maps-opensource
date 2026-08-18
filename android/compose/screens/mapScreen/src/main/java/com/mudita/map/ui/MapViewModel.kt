@@ -368,6 +368,7 @@ class MapViewModel @Inject constructor(
             it.copy(
                 finalLocation = null,
                 navigationSteps = emptyList(),
+                transitLegs = emptyList(),
                 estimatedRouteTime = null,
                 estimatedRouteDistance = null,
                 searchItem = null,
@@ -1073,6 +1074,7 @@ class MapViewModel @Inject constructor(
                     estimatedRouteDistance = osmAndFormatter.getFormattedDistanceValue(estimatedRouteDistance.toFloat()).formattedValue,
                     estimatedRouteTime = NavigationTime.create(estimatedRouteTime),
                     navigationSteps = NavigationStep.createSteps(estimatedNextTurnDistance.toFloat(), routeDirections.orEmpty(), osmAndFormatter),
+                    transitLegs = emptyList(),
                     searchItem = null,
                     missingMaps = emptyList(),
                 )
@@ -1278,6 +1280,7 @@ class MapViewModel @Inject constructor(
                 missingMaps = missingMaps,
                 finalLocation = null,
                 navigationSteps = emptyList(),
+                transitLegs = emptyList(),
                 estimatedRouteTime = null,
                 estimatedRouteDistance = null,
                 searchItem = null,
