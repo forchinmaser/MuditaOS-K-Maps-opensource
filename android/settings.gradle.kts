@@ -25,10 +25,12 @@ pluginManagement {
     }
 }
 
-plugins {
-    val sentryPlugin = "0.0.43"
-    id("com.mudita.sentry.plugins.release") version sentryPlugin apply false
-}
+// The com.mudita.sentry.plugins.release plugin (uploads ProGuard/R8 mapping files to Sentry on
+// release builds) previously declared here required Mudita's private Artifactory repo, which
+// isn't reachable outside Mudita's own CI. Declaring it at all makes Gradle try to resolve its
+// classpath during settings evaluation, before any build type or credential check can skip it -
+// so it broke every sync on a machine without those credentials, not just release builds.
+// Removed along with the matching `apply from` in app/build.gradle (see gradle/sentry-config.gradle).
 
 include(":app")
 include(":MapJava")

@@ -16,12 +16,7 @@ import com.mudita.download.repository.utils.DownloadManager
 import com.mudita.map.common.enums.DrivingRegion
 import com.mudita.map.common.enums.MetricsConstants
 import com.mudita.map.common.repository.SettingsRepository
-import com.mudita.maps.BuildConfig.BUILD_TYPE
-import com.mudita.maps.BuildConfig.DEBUG
-import com.mudita.maps.BuildConfig.PROGUARD_UUID
-import com.mudita.maps.BuildConfig.SENTRY_DSN
 import com.mudita.maps.R
-import com.mudita.sentry.sdk.SentryInitializer
 import dagger.hilt.android.HiltAndroidApp
 import java.io.File
 import java.util.Calendar
@@ -159,14 +154,10 @@ class OsmandApplication : Application() {
 
     // Typeface
     override fun onCreate() {
-
-        SentryInitializer.init(
-            context = this,
-            dsn = SENTRY_DSN,
-            proguardUuid = PROGUARD_UUID,
-            environment = BUILD_TYPE,
-            isEnabled = !DEBUG,
-        )
+        // Sentry crash reporting (com.mudita:sentry-sdk) removed: it and the
+        // com.mudita.sentry.plugins.release Gradle plugin both require Mudita's private
+        // Artifactory, which isn't reachable outside Mudita's own CI. See
+        // settings.gradle.kts and gradle/sentry-config.gradle.
 
         if (RestartActivity.isRestartProcess(this)) {
             return
